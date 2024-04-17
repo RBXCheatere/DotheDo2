@@ -1,8 +1,277 @@
---[[
-Carma Obfuscator/ by KrakenM0dz
+-- Define your ESP table
+local ESP = {}
 
-]]--
+-- Your ESP settings
+ESP.settings = {
+    box = {
+        enabled = false,
+        color = Color3.new(1, 1, 1),
+        thickness = 1,
+        transparency = 1,
+        filled = false
+    },
+    text = {
+        nameEnabled = false,
+        color = Color3.new(1, 1, 1),
+        size = 13,
+        center = true,
+        outline = true,
+        outlineColor = Color3.new(0, 0, 0)
+    },
+    distanceText = {
+        enabled = false,
+        color = Color3.new(0, 1, 0),
+        size = 13,
+        center = true,
+        outline = true,
+        outlineColor = Color3.new(0, 0, 0)
+    },
+    healthText = {
+        enabled = false,
+        color = Color3.new(1, 1, 0),
+        size = 13,
+        center = true,
+        outline = true,
+        outlineColor = Color3.new(0, 0, 0)
+    },
+    healthBar = {
+        enabled = false,
+        color = Color3.new(1, 1, 0),
+        size = 13,
+        center = true,
+        outline = true,
+        outlineColor = Color3.new(0, 0, 0)
+    }
+}
 
+local espObjects = {}
 
+local function CreateESP(part)
+    local boxSettings = ESP.settings.box
+    local textSettings = ESP.settings.text
+    local distanceTextSettings = ESP.settings.distanceText
+    local healthTextSettings = ESP.settings.healthText
+    local healthBarSettings = ESP.settings.healthBar
 
-local v0=string.char;local v1=string.byte;local v2=string.sub;local v3=bit32 or bit ;local v4=v3.bxor;local v5=table.concat;local v6=table.insert;local function v7(v16,v17) local v18={};for v51=1, #v16 do v6(v18,v0(v4(v1(v2(v16,v51,v51 + 1 )),v1(v2(v17,1 + (v51% #v17) ,1 + (v51% #v17) + 1 )))%256 ));end return v5(v18);end local v8={};v8.settings={[v7("\211\204\195","\126\177\163\187\69\134\219\167")]={[v7("\38\195\43\199\240\38\201","\156\67\173\74\165")]=true,[v7("\55\184\69\25\174","\38\84\215\41\118\220\70")]=Color3.new(1552 -(1126 + 425) ,1,1 + 0 ),[v7("\68\30\43\17\245\94\19\49\1","\158\48\118\66\114")]=406 -(118 + 287) ,[v7("\191\54\17\56\96\181\250\185\33\30\53\106","\155\203\68\112\86\19\197")]=1,[v7("\64\212\58\240\69\124","\152\38\189\86\156\32\24\133")]=false},[v7("\232\82\191\82","\38\156\55\199")]={[v7("\166\124\113\45\54\122\251\65\164\120\120","\35\200\29\28\72\115\20\154")]=true,[v7("\26\176\221\208\159","\84\121\223\177\191\237\76")]=Color3.new(3 -2 ,1,1122 -(118 + 1003) ),[v7("\168\95\211\165","\161\219\54\169\192\90\48\80")]=38 -25 ,[v7("\74\71\14\49\76\80","\69\41\34\96")]=true,[v7("\179\214\195\6\11\37\185","\75\220\163\183\106\98")]=true,[v7("\13\175\159\59\208\12\191\168\56\213\13\168","\185\98\218\235\87")]=Color3.new(377 -(142 + 235) ,0 -0 ,0 + 0 )},[v7("\207\53\52\242\223\164\200\57\19\227\198\190","\202\171\92\71\134\190")]={[v7("\44\207\45\138\37\196\40","\232\73\161\76")]=true,[v7("\184\214\78\82\12","\126\219\185\34\61")]=Color3.new(0 + 0 ,978 -(553 + 424) ,0 -0 ),[v7("\31\199\68\119","\135\108\174\62\18\30\23\147")]=13,[v7("\181\236\36\223\29\188","\167\214\137\74\171\120\206\83")]=true,[v7("\132\229\38\81\241\169\142","\199\235\144\82\61\152")]=true,[v7("\8\3\173\39\14\24\188\8\8\26\182\57","\75\103\118\217")]=Color3.new(0,0 + 0 ,0 + 0 )},[v7("\207\81\113\24\173\22\243\81\104\0","\126\167\52\16\116\217")]={[v7("\205\32\33\130\184\28\248","\156\168\78\64\224\212\121")]=true,[v7("\4\225\169\193\21","\174\103\142\197")]=Color3.new(1 + 0 ,1 -0 ,0 + 0 ),[v7("\69\33\69\61","\152\54\72\63\88\69\62")]=13,[v7("\215\193\224\72\209\214","\60\180\164\142")]=true,[v7("\87\75\17\37\46\227\23","\114\56\62\101\73\71\141")]=true,[v7("\183\252\207\200\177\231\222\231\183\229\212\214","\164\216\137\187")]=Color3.new(0 + 0 ,0 -0 ,0)},[v7("\218\227\48\190\178\246\41\211\244","\107\178\134\81\210\198\158")]={[v7("\61\0\131\196\166\61\10","\202\88\110\226\166")]=true,[v7("\192\0\142\248\216","\170\163\111\226\151")]=Color3.new(2 -1 ,2 -1 ,0 + 0 ),[v7("\2\57\168\61","\73\113\80\210\88\46\87")]=4 + 9 ,[v7("\130\41\195\6\226\147","\135\225\76\173\114")]=true,[v7("\21\248\172\188\165\179\162","\199\122\141\216\208\204\221")]=true,[v7("\162\200\4\252\113\248\168\254\31\252\119\228","\150\205\189\112\144\24")]=Color3.new(0 -0 ,0 -0 ,753 -(239 + 514) )}};local v10={};local function v11(v19) local v20=0 + 0 ;local v21;local v22;local v23;local v24;local v25;local v26;local v27;local v28;local v29;local v30;local v31;local v32;local v33;local v34;while true do if (v20==(1332 -(797 + 532))) then v30=nil;v31=nil;v32=nil;v20=3 + 1 ;end if (v20==(0 + 0)) then v21=0 -0 ;v22=nil;v23=nil;v20=1203 -(373 + 829) ;end if (v20==(735 -(476 + 255))) then v33=nil;v34=nil;while true do if (v21==1) then v25=nil;v26=nil;v27=nil;v21=1132 -(369 + 761) ;end if (v21==(2 + 0)) then v28=nil;v29=nil;v30=nil;v21=2 + 1 ;end if (v21==(6 -2)) then v34=nil;while true do if (v22==(20 -9)) then local v60=238 -(64 + 174) ;while true do if (0==v60) then v34={Color3.new(377 -122 ,0,336 -(144 + 192) ),Color3.new(471 -(42 + 174) ,192 + 63 ,815 -(98 + 717) ),Color3.new(0 + 0 ,322 -67 ,1504 -(363 + 1141) )};return {[v7("\243\213\201\60\242\192","\93\134\165\173")]=function() if (v19 and v19.Parent) then local v129=1580 -(1183 + 397) ;local v130;local v131;local v132;while true do if (v129==0) then v130=0 -0 ;v131=nil;v129=1;end if (v129==(1 + 0)) then v132=nil;while true do if (v130==(1 + 0)) then if (v132 and (v131.Humanoid.Health>(0 + 0))) then local v141=0 + 0 ;local v142;local v143;while true do if (v141==(0 + 0)) then v142=1975 -(1913 + 62) ;v143=nil;v141=1 + 0 ;end if (v141==1) then while true do if (v142==(0 + 0)) then v143=v131:FindFirstChild(v7("\205\75\113\14","\106\133\46\16"));if v143 then local v153=workspace.CurrentCamera;local v154,v155=v153:WorldToViewportPoint(v143.Position-Vector3.new(0,2,0 -0 ) );if v155 then local v158=1933 -(565 + 1368) ;local v159;local v160;local v161;local v162;local v163;while true do if ((0 -0)==v158) then v159=((1662 -(1477 + 184))/(v154.Z * math.tan(math.rad(v153.FieldOfView/2 )) * (1 + 1))) * (1533 -(797 + 636)) ;v160=math.floor((169 -134) * v159 );v161=math.floor(50 * v159 );v158=1 -0 ;end if (v158==(2 + 0)) then v28.PointC=v162-Vector2.new( -v160/(858 -(564 + 292)) , -v161/(2 -0) ) ;v28.PointD=v162-Vector2.new(v160/(5 -3) , -v161/2 ) ;v28.Visible=v23.enabled;v158=2 + 1 ;end if (v158==(308 -(244 + 60))) then v29.Visible=v24.nameEnabled;if v26.enabled then local v176=0;local v177;local v178;while true do if ((0 + 0)==v176) then v177=v132.Health;v178=v132.MaxHealth;v176=1 + 0 ;end if (v176==(1 + 0)) then if (v178>(0 + 0)) then local v202=476 -(41 + 435) ;local v203;while true do if (v202==(1002 -(938 + 63))) then v31.Position=v162 + Vector2.new( -((v160/2) + 14 + 4), -(v161/(1127 -(936 + 189))) -(1 + 1) ) ;v31.Visible=true;break;end if (v202==(0 -0)) then local v207=1613 -(1565 + 48) ;while true do if (v207==(0 + 0)) then v203=v177/v178 ;v31.Text=string.format(v7("\29\36\54\185","\32\56\64\19\156\58"),v203 * (1238 -(782 + 356)) );v207=268 -(176 + 91) ;end if (v207==(2 -1)) then v202=1 -0 ;break;end end end end else v31.Visible=false;end break;end end else v31.Visible=false;end if v27.enabled then local v180=1092 -(975 + 117) ;local v181;local v182;local v183;local v184;while true do if (v180==(1877 -(157 + 1718))) then while true do if (v181==(0 + 0)) then v182=0;v183=nil;v181=1 + 0 ;end if (v181==(1 -0)) then v184=nil;while true do if (v182==(1912 -(340 + 1571))) then if (v184>(0 + 0)) then local v212=v183/v184 ;local v213=v161 * v212 ;local v214=(v162.X-(v160/(6 -4))) -(10 -6) ;local v215=v162.Y-(v161/(6 -4)) ;v33.From=Vector2.new(v214,v215);v33.To=Vector2.new(v214,v215 + v213 );local v218=math.floor(v212 * ( #v34-(1019 -(697 + 321))) ) + (2 -1) ;local v219=v34[v218];v33.Color=v219;v33.Visible=true;v32.From=Vector2.new(v214,v215);v32.To=Vector2.new(v214,v162.Y + (v161/(3 -1)) );v32.Color=Color3.new(0 -0 ,512 -(409 + 103) ,0 + 0 );v32.Visible=true;else v33.Visible=false;v32.Visible=false;end break;end if (v182==(0 -0)) then v183=v131.Humanoid.Health;v184=v131.Humanoid.MaxHealth;v182=2 -1 ;end end break;end end break;end if (v180==(1227 -(322 + 905))) then v181=1317 -(1114 + 203) ;v182=nil;v180=612 -(602 + 9) ;end if (v180==(1190 -(449 + 740))) then v183=nil;v184=nil;v180=728 -(228 + 498) ;end end end v158=877 -(826 + 46) ;end if (v158==(950 -(245 + 702))) then v163=tostring(v131.Name);v29.Text=v163;v29.Position=v162 + Vector2.new(0, -(v161/(665 -(174 + 489))) -(38 -23) ) ;v158=12 -8 ;end if (5==v158) then if v25.enabled then local v185=0 + 0 ;local v186;local v187;local v188;local v189;while true do if (v185==(1899 -(260 + 1638))) then v188=nil;v189=nil;v185=442 -(382 + 58) ;end if (v185==(6 -4)) then while true do if (v186==(0 + 0)) then v187=0 -0 ;v188=nil;v186=2 -1 ;end if (v186==(1206 -(902 + 303))) then v189=nil;while true do if (v187==(0 -0)) then v188=game.Players.LocalPlayer;v189=v188.Character and v188.Character:FindFirstChild(v7("\114\221\232\87\84\253\137\94\250\234\89\78\194\129\72\220","\224\58\168\133\54\58\146")) ;v187=1 -0 ;end if (v187==(2 -1)) then if v189 then local v228=0 -0 ;local v229;local v230;local v231;while true do if (v228==(1 + 0)) then v231=nil;while true do if (v229==(1691 -(1121 + 569))) then v30.Text=v231   .. "m" ;v30.Position=v162 + Vector2.new(214 -(22 + 192) ,(v161/(2 -0)) + (6 -4) ) ;v229=1250 -(111 + 1137) ;end if (v229==(685 -(483 + 200))) then v30.Visible=true;break;end if (v229==(1463 -(1404 + 59))) then local v235=0 -0 ;while true do if (v235==(1 -0)) then v229=524 -(423 + 100) ;break;end if (v235==(765 -(468 + 297))) then v230=(v19.Position-v189.Position).Magnitude;v231=math.floor((v230/(565.5714285714 -(334 + 228))) + (0.5 -0) );v235=772 -(326 + 445) ;end end end end break;end if ((0 -0)==v228) then v229=0;v230=nil;v228=1 -0 ;end end end break;end end break;end end break;end if (v185==0) then v186=0 -0 ;v187=nil;v185=1 + 0 ;end end else v30.Visible=false;end break;end if (v158==1) then local v174=236 -(141 + 95) ;local v175;while true do if (v174==0) then v175=0 + 0 ;while true do if (v175==1) then v28.PointB=v162-Vector2.new( -v160/(883 -(614 + 267)) ,v161/(4 -2) ) ;v158=4 -2 ;break;end if (v175==(0 + 0)) then v162=Vector2.new(v154.X,v154.Y);v28.PointA=v162-Vector2.new(v160/(5 -3) ,v161/(2 + 0) ) ;v175=1 + 0 ;end end break;end end end end else local v164=0 -0 ;local v165;while true do if (v164==(0 + 0)) then v165=0 -0 ;while true do if ((2 + 0)==v165) then v30.Visible=false;v32.Visible=false;break;end if (v165==(164 -(92 + 71))) then local v193=0 + 0 ;while true do if (v193==1) then v165=2 -0 ;break;end if (v193==(765 -(574 + 191))) then v33.Visible=false;v31.Visible=false;v193=1 + 0 ;end end end if (v165==(0 -0)) then v28.Visible=false;v29.Visible=false;v165=1;end end break;end end end end break;end end break;end end else local v144=0 + 0 ;local v145;while true do if (v144==(849 -(254 + 595))) then v145=0 -0 ;while true do if (v145==(127 -(55 + 71))) then v33.Visible=false;v31.Visible=false;v145=1 + 1 ;end if (2==v145) then v30.Visible=false;v32.Visible=false;break;end if ((0 + 0)==v145) then local v152=0 -0 ;while true do if (v152==(1791 -(573 + 1217))) then v145=1;break;end if (v152==(0 -0)) then v28.Visible=false;v29.Visible=false;v152=1 + 0 ;end end end end break;end end end break;end if (v130==(0 -0)) then local v140=0;while true do if (v140==(0 -0)) then local v146=939 -(714 + 225) ;while true do if (1==v146) then v140=2 -1 ;break;end if ((0 -0)==v146) then v131=v19.Parent;v132=v131:FindFirstChildOfClass(v7("\150\231\204\195\52\193\187\122","\30\222\146\161\162\90\174\210"));v146=1 + 0 ;end end end if (v140==(1 -0)) then v130=1 + 0 ;break;end end end end break;end end end end,[v7("\75\83\70\242\99\131","\107\57\54\43\157\21\230\231")]=function() local v127=0;while true do if (v127==(3 -1)) then v33:Remove();v32:Remove();break;end if (v127==(1 -0)) then v30:Remove();v31:Remove();v127=808 -(118 + 688) ;end if (v127==0) then local v138=48 -(25 + 23) ;while true do if (v138==(1284 -(1040 + 243))) then v127=1 + 0 ;break;end if ((0 -0)==v138) then v28:Remove();v29:Remove();v138=1887 -(927 + 959) ;end end end end end};end end end if (v22==(13 -9)) then v29.Outline=v24.outline;v29.OutlineColor=v24.outlineColor;v30=Drawing.new(v7("\184\0\71\82","\128\236\101\63\38\132\33"));v30.Visible=v25.enabled;v22=1936 -(609 + 1322) ;end if (v22==(741 -(16 + 716))) then v32.From=Vector2.new(0 -0 ,97 -(11 + 86) );v32.To=Vector2.new(0 -0 ,0 -0 );v33=Drawing.new(v7("\129\113\183\133","\83\205\24\217\224"));v33.Visible=v27.enabled;v22=295 -(175 + 110) ;end if (v22==(2 -1)) then local v71=0 -0 ;local v72;while true do if ((1796 -(503 + 1293))==v71) then v72=0 -0 ;while true do if (v72==(5 -3)) then v22=2 + 0 ;break;end if (v72==(1062 -(810 + 251))) then v28.Visible=v23.enabled;v28.Color=v23.color;v72=2 + 0 ;end if (v72==(0 + 0)) then v27=v8.settings.healthBar;v28=Drawing.new(v7("\20\145\190\72","\112\69\228\223\44\100\232\113"));v72=1 + 0 ;end end break;end end end if (v22==(7 + 0)) then local v73=0;while true do if (v73==(533 -(43 + 490))) then v31.Size=v26.size;v31.Center=v26.center;v73=734 -(711 + 22) ;end if (v73==(1 + 0)) then v31.Outline=v26.outline;v31.OutlineColor=v26.outlineColor;v73=7 -5 ;end if (v73==(435 -(153 + 280))) then v22=867 -(240 + 619) ;break;end end end if (v22==(2 + 6)) then v32=Drawing.new(v7("\107\197\59\217","\100\39\172\85\188"));v32.Visible=v27.enabled;v32.Thickness=5 -1 ;v32.Transparency=0.5;v22=1 + 8 ;end if (v22==(3 + 0)) then v29.Visible=v24.nameEnabled;v29.Color=v24.color;v29.Size=v24.size;v29.Center=v24.center;v22=4;end if (v22==(1750 -(1344 + 400))) then v30.OutlineColor=v25.outlineColor;v31=Drawing.new(v7("\152\172\9\80","\175\204\201\113\36\214\139"));v31.Visible=v26.enabled;v31.Color=v26.color;v22=412 -(255 + 150) ;end if (v22==(8 + 2)) then local v92=0 + 0 ;while true do if ((0 + 0)==v92) then v33.Thickness=2 -0 ;v33.Transparency=4 -3 ;v92=3 -2 ;end if (v92==(1740 -(404 + 1335))) then v33.From=Vector2.new(406 -(183 + 223) ,0 -0 );v33.To=Vector2.new(0 + 0 ,0 + 0 );v92=2 + 0 ;end if (v92==(1 + 1)) then v22=348 -(10 + 327) ;break;end end end if (v22==(2 + 0)) then v28.Thickness=v23.thickness;v28.Transparency=v23.transparency;v28.Filled=v23.filled;v29=Drawing.new(v7("\224\26\31\199","\230\180\127\103\179\214\28"));v22=341 -(118 + 220) ;end if ((2 + 3)==v22) then v30.Color=v25.color;v30.Size=v25.size;v30.Center=v25.center;v30.Outline=v25.outline;v22=455 -(108 + 341) ;end if (v22==(0 + 0)) then v23=v8.settings.box;v24=v8.settings.text;v25=v8.settings.distanceText;v26=v8.settings.healthText;v22=4 -3 ;end end break;end if (v21==(0 + 0)) then v22=1493 -(711 + 782) ;v23=nil;v24=nil;v21=1 -0 ;end if (v21==(472 -(270 + 199))) then v31=nil;v32=nil;v33=nil;v21=2 + 2 ;end end break;end if (v20==(1 + 0)) then v24=nil;v25=nil;v26=nil;v20=1821 -(580 + 1239) ;end if (v20==(5 -3)) then v27=nil;v28=nil;v29=nil;v20=3 + 0 ;end end end local function v12() local v35=0;local v36;local v37;local v38;while true do if (v35==(1 + 0)) then v38=nil;while true do if (v36==(1 + 0)) then for v58,v59 in ipairs(game.Players:GetPlayers()) do if (v59~=v37) then local v111=0 + 0 ;local v112;while true do if (v111==0) then v112=v59.Character;if (v112 and v112:FindFirstChild(v7("\20\186\140\77\237\118\113\56\157\142\67\247\73\121\46\187","\24\92\207\225\44\131\25"))) then local v128=v112.HumanoidRootPart;if  not v10[v112] then v10[v112]=v11(v128);end v10[v112].update();end break;end end end end break;end if (v36==(0 -0)) then local v56=0 + 0 ;while true do if (v56==0) then v37=game.Players.LocalPlayer;v38=v37.Character and v37.Character:FindFirstChild(v7("\243\158\28\244\183\211\198\223\185\30\250\173\236\206\201\159","\175\187\235\113\149\217\188")) ;v56=1 + 0 ;end if ((1168 -(645 + 522))==v56) then v36=1;break;end end end end break;end if (v35==(0 + 0)) then v36=1790 -(1010 + 780) ;v37=nil;v35=1 + 0 ;end end end local function v13(v39) local v40=0;local v41;local v42;while true do if ((4 -3)==v40) then while true do if ((0 -0)==v41) then v42=v39:WaitForChild(v7("\99\198\181\77\21\114\66\215\138\67\20\105\123\210\170\88","\29\43\179\216\44\123"));v10[v39]=v11(v42);break;end end break;end if (v40==(0 + 0)) then v41=0 -0 ;v42=nil;v40=1837 -(1045 + 791) ;end end end local function v14(v43) local v44=v10[v43];if v44 then local v52=0 + 0 ;while true do if (v52==(0 -0)) then v44.remove();v10[v43]=nil;break;end end end end local function v15(v45) local v46=0 -0 ;local v47;local v48;while true do if (v46==(507 -(351 + 154))) then v45.CharacterAdded:Connect(v47);v45.CharacterRemoving:Connect(v48);v46=1803 -(884 + 916) ;end if (v46==(1575 -(1281 + 293))) then v48=nil;function v48(v53) v14(v53);end v46=268 -(28 + 238) ;end if (v46==(0 -0)) then v47=nil;function v47(v54) v13(v54);end v46=1 -0 ;end if (v46==(1562 -(1381 + 178))) then if v45.Character then v13(v45.Character);end break;end end end game.Players.PlayerAdded:Connect(v15);for v49,v50 in ipairs(game.Players:GetPlayers()) do v15(v50);end game:GetService(v7("\143\204\46\127\184\203\54\69\190\220","\44\221\185\64")).Heartbeat:Connect(v12);return v8;
+    local box = Drawing.new("Quad")
+    box.Visible = boxSettings.enabled
+    box.Color = boxSettings.color
+    box.Thickness = boxSettings.thickness
+    box.Transparency = boxSettings.transparency
+    box.Filled = boxSettings.filled
+
+    local text = Drawing.new("Text")
+    text.Visible = textSettings.nameEnabled
+    text.Color = textSettings.color
+    text.Size = textSettings.size
+    text.Center = textSettings.center
+    text.Outline = textSettings.outline
+    text.OutlineColor = textSettings.outlineColor
+
+    local distancetext = Drawing.new("Text")
+    distancetext.Visible = distanceTextSettings.enabled
+    distancetext.Color = distanceTextSettings.color
+    distancetext.Size = distanceTextSettings.size
+    distancetext.Center = distanceTextSettings.center
+    distancetext.Outline = distanceTextSettings.outline
+    distancetext.OutlineColor = distanceTextSettings.outlineColor
+
+    local healthText = Drawing.new("Text")
+    healthText.Visible = healthTextSettings.enabled
+    healthText.Color = healthTextSettings.color
+    healthText.Size = healthTextSettings.size
+    healthText.Center = healthTextSettings.center
+    healthText.Outline = healthTextSettings.outline
+    healthText.OutlineColor = healthTextSettings.outlineColor
+
+    local healthBarBackground = Drawing.new("Line")
+    healthBarBackground.Visible = healthBarSettings.enabled
+    healthBarBackground.Thickness = 4 -- Background thickness
+    healthBarBackground.Transparency = 0.5 -- Background transparency
+    healthBarBackground.From = Vector2.new(0, 0)
+    healthBarBackground.To = Vector2.new(0, 0) -- Initial position (will be updated dynamically)
+
+    local healthBar = Drawing.new("Line")
+    healthBar.Visible = healthBarSettings.enabled
+    healthBar.Thickness = 2 -- Health bar thickness
+    healthBar.Transparency = 1 -- No transparency for health bar
+    healthBar.From = Vector2.new(0, 0)
+    healthBar.To = Vector2.new(0, 0) -- Initial position (will be updated dynamically)
+
+    local gradientColors = {
+        Color3.new(255, 0, 0), -- Red
+        Color3.new(255, 255, 0), -- Yellow
+        Color3.new(0, 255, 0) -- Green
+    }
+
+    return {
+        update = function()
+            if part and part.Parent then
+                local character = part.Parent
+                local humanoid = character:FindFirstChildOfClass("Humanoid")
+                if humanoid and character.Humanoid.Health > 0 then -- Only update if health > 0%
+                    local head = character:FindFirstChild("Head")
+                    if head then
+                        local camera = workspace.CurrentCamera
+                        local headPosition, headVisible = camera:WorldToViewportPoint(head.Position - Vector3.new(0, 2, 0))
+                        if headVisible then
+                            local scaleFactor = 1 / (headPosition.Z * math.tan(math.rad(camera.FieldOfView / 2)) * 2) * 100
+                            local width = math.floor(35 * scaleFactor)
+                            local height = math.floor(50 * scaleFactor)
+                            local headScreenPosition = Vector2.new(headPosition.X, headPosition.Y)
+                            box.PointA = headScreenPosition - Vector2.new(width / 2, height / 2)
+                            box.PointB = headScreenPosition - Vector2.new(-width / 2, height / 2)
+                            box.PointC = headScreenPosition - Vector2.new(-width / 2, -height / 2)
+                            box.PointD = headScreenPosition - Vector2.new(width / 2, -height / 2)
+                            box.Visible = boxSettings.enabled
+
+                            local nameText = tostring(character.Name)
+                            text.Text = nameText
+                            text.Position = headScreenPosition + Vector2.new(0, -(height / 2) - 15)
+                            text.Visible = textSettings.nameEnabled
+
+                        -- Update health text
+                            if healthTextSettings.enabled then
+                                local health = humanoid.Health
+                                local maxHealth = humanoid.MaxHealth
+                                if maxHealth > 0 then
+                                    local healthPercentage = health / maxHealth
+                                    healthText.Text = string.format("%d%%", healthPercentage * 100)
+                                    healthText.Position = headScreenPosition + Vector2.new(-(width / 2 + 18), -(height / 2) - 2)
+                                    healthText.Visible = true
+                                else
+                                    healthText.Visible = false
+                                end
+                            else
+                                healthText.Visible = false
+                            end
+
+                            -- Update health bar
+                            if healthBarSettings.enabled then
+                                local health = character.Humanoid.Health
+                                local maxHealth = character.Humanoid.MaxHealth
+                                if maxHealth > 0 then
+                                    local healthPercentage = health / maxHealth
+                                    local barLength = height * healthPercentage
+                                    local barX = headScreenPosition.X - width / 2 - 4
+                                    local barY = headScreenPosition.Y - height / 2
+
+                                    -- Update health bar position
+                                    healthBar.From = Vector2.new(barX, barY)
+                                    healthBar.To = Vector2.new(barX, barY + barLength)
+
+                                    -- Calculate color based on gradient
+                                    local colorIndex = math.floor(healthPercentage * (#gradientColors - 1)) + 1
+                                    local gradientColor = gradientColors[colorIndex]
+
+                                    healthBar.Color = gradientColor
+                                    healthBar.Visible = true
+
+                                    -- Update health bar background position and size
+                                    healthBarBackground.From = Vector2.new(barX, barY)
+                                    healthBarBackground.To = Vector2.new(barX, headScreenPosition.Y + height / 2)  -- Extend to the bottom of the health bar
+                                    healthBarBackground.Color = Color3.new(0, 0, 0)  -- Background color (e.g., black)
+                                    healthBarBackground.Visible = true
+                                else
+                                    healthBar.Visible = false
+                                    healthBarBackground.Visible = false
+                                end
+                        
+                        end
+       if distanceTextSettings.enabled then
+                                local localPlayer = game.Players.LocalPlayer
+                                local localHumanoidRootPart = localPlayer.Character and localPlayer.Character:FindFirstChild("HumanoidRootPart")
+                                if localHumanoidRootPart then
+                                    local distance = (part.Position - localHumanoidRootPart.Position).Magnitude
+                                    local meterDistance = math.floor(distance / 3.5714285714 + 0.5)
+                                    distancetext.Text = meterDistance .. "m"
+                                    distancetext.Position = headScreenPosition + Vector2.new(0, (height / 2) + 2)
+                                    distancetext.Visible = true
+                                end
+                            end
+                        else
+                            box.Visible = false
+                            text.Visible = false
+                            healthBar.Visible = false
+                            healthText.Visible = false
+                            distancetext.Visible = false
+                            healthBarBackground.Visible = false
+                        end
+                    end
+                else
+                    -- Hide all components if health is 0 or below
+                    box.Visible = false
+                    text.Visible = false
+                    healthBar.Visible = false
+                    healthText.Visible = false
+                    distancetext.Visible = false
+                    healthBarBackground.Visible = false
+                end
+            end
+        end,
+        remove = function()
+            box:Remove()
+            text:Remove()
+            distancetext:Remove()
+            healthText:Remove()
+            healthBar:Remove()
+            healthBarBackground:Remove()
+        end
+    }
+end
+
+local function updateESP()
+    local localPlayer = game.Players.LocalPlayer
+    local localHumanoidRootPart = localPlayer.Character and localPlayer.Character:FindFirstChild("HumanoidRootPart")
+    for _, player in ipairs(game.Players:GetPlayers()) do
+        if player ~= localPlayer then
+            local character = player.Character
+            if character and character:FindFirstChild("HumanoidRootPart") then
+                local humanoidRootPart = character.HumanoidRootPart
+                if not espObjects[character] then
+                    espObjects[character] = CreateESP(humanoidRootPart)
+                end
+                espObjects[character].update()
+            end
+        end
+    end
+end
+
+local function handleCharacterAdded(character)
+    local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+    espObjects[character] = CreateESP(humanoidRootPart)
+end
+
+local function handleCharacterRemoving(character)
+    local espObject = espObjects[character]
+    if espObject then
+        espObject.remove()
+        espObjects[character] = nil
+    end
+end
+
+local function handlePlayerAdded(player)
+    local function onCharacterAdded(character)
+        handleCharacterAdded(character)
+    end
+
+    local function onCharacterRemoving(character)
+        handleCharacterRemoving(character)
+    end
+
+    player.CharacterAdded:Connect(onCharacterAdded)
+    player.CharacterRemoving:Connect(onCharacterRemoving)
+
+    if player.Character then
+        handleCharacterAdded(player.Character)
+    end
+end
+
+game.Players.PlayerAdded:Connect(handlePlayerAdded)
+for _, player in ipairs(game.Players:GetPlayers()) do
+    handlePlayerAdded(player)
+end
+
+game:GetService("RunService").Heartbeat:Connect(updateESP)
+
+return ESP
