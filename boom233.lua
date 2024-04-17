@@ -115,7 +115,7 @@ local function CreateESP(part)
                         local camera = workspace.CurrentCamera
                         local headPosition, headVisible = camera:WorldToViewportPoint(head.Position - Vector3.new(0, 2, 0))
                         if headVisible then
-                            local scaleFactor = 1 / (headPosition.Z * math.tan(math.rad(camera.FieldOfView / 2)) * 2) * 100
+                        local scaleFactor = 1 / (headPosition.Z * math.tan(math.rad(camera.FieldOfView / 2)) * 2) * 100
                             local width = math.floor(35 * scaleFactor)
                             local height = math.floor(50 * scaleFactor)
                             local headScreenPosition = Vector2.new(headPosition.X, headPosition.Y)
@@ -125,31 +125,48 @@ local function CreateESP(part)
                             box.PointD = headScreenPosition - Vector2.new(width / 2, -height / 2)
                             box.Visible = boxSettings.enabled
 
-                            local nameText = tostring(character.Name)
-                            text.Text = nameText
-                            text.Position = headScreenPosition + Vector2.new(0, -(height / 2) - 15)
-                            text.Visible = textSettings.nameEnabled
+                            -- Update name text visibility and position
+                            local nameEnabled = ESP.settings.text.nameEnabled
+                            text.Visible = nameEnabled
+                            if nameEnabled then
+                                local nameText = tostring(character.Name)
+                                text.Text = nameText
+                                text.Position = headScreenPosition + Vector2.new(0, -(height / 2) - 15)
+                            end
 
-                        -- Update health text
-                            if healthTextSettings.enabled then
+                            -- Update health text visibility and position
+                            local healthTextEnabled = ESP.settings.healthText.enabled
+                            healthText.Visible = healthTextEnabled
+                            if healthTextEnabled then
                                 local health = humanoid.Health
                                 local maxHealth = humanoid.MaxHealth
                                 if maxHealth > 0 then
                                     local healthPercentage = health / maxHealth
                                     healthText.Text = string.format("%d%%", healthPercentage * 100)
                                     healthText.Position = headScreenPosition + Vector2.new(-(width / 2 + 18), -(height / 2) - 2)
-                                    healthText.Visible = true
-                                else
-                                    healthText.Visible = false
                                 end
-                            else
-                                healthText.Visible = false
                             end
 
-                            -- Update health bar
-                            if healthBarSettings.enabled then
-                                local health = character.Humanoid.Health
-                                local maxHealth = character.Humanoid.MaxHealth
+                            -- Update distance text visibility and position
+                            local distanceTextEnabled = ESP.settings.distanceText.enabled
+                            distancetext.Visible = distanceTextEnabled
+                            if distanceTextEnabled then
+                                local localPlayer = game.Players.LocalPlayer
+                                local localHumanoidRootPart = localPlayer.Character and localPlayer.Character:FindFirstChild("HumanoidRootPart")
+                                if localHumanoidRootPart then
+                                    local distance = (part.Position - localHumanoidRootPart.Position).Magnitude
+                                    local meterDistance = math.floor(distance / 3.5714285714 + 0.5)
+                                    distancetext.Text = meterDistance .. "m"
+                                    distancetext.Position = headScreenPosition + Vector2.new(0, (height / 2) + 2)
+                                end
+                            end
+
+                            -- Update health bar visibility, position, and color
+                            local healthBarEnabled = ESP.settings.healthBar.enabled
+                            healthBar.Visible = healthBarEnabled
+                            if healthBarEnabled then
+                                local health = humanoid.Health
+                                local maxHealth = humanoid.MaxHealth
                                 if maxHealth > 0 then
                                     local healthPercentage = health / maxHealth
                                     local barLength = height * healthPercentage
@@ -165,46 +182,29 @@ local function CreateESP(part)
                                     local gradientColor = gradientColors[colorIndex]
 
                                     healthBar.Color = gradientColor
-                                    healthBar.Visible = true
-
-                                    -- Update health bar background position and size
-                                    healthBarBackground.From = Vector2.new(barX, barY)
-                                    healthBarBackground.To = Vector2.new(barX, headScreenPosition.Y + height / 2)  -- Extend to the bottom of the health bar
-                                    healthBarBackground.Color = Color3.new(0, 0, 0)  -- Background color (e.g., black)
-                                    healthBarBackground.Visible = true
-                                else
-                                    healthBar.Visible = false
-                                    healthBarBackground.Visible = false
-                                end
-                        
-                        end
-       if distanceTextSettings.enabled then
-                                local localPlayer = game.Players.LocalPlayer
-                                local localHumanoidRootPart = localPlayer.Character and localPlayer.Character:FindFirstChild("HumanoidRootPart")
-                                if localHumanoidRootPart then
-                                    local distance = (part.Position - localHumanoidRootPart.Position).Magnitude
-                                    local meterDistance = math.floor(distance / 3.5714285714 + 0.5)
-                                    distancetext.Text = meterDistance .. "m"
-                                    distancetext.Position = headScreenPosition + Vector2.new(0, (height / 2) + 2)
-                                    distancetext.Visible = true
                                 end
                             end
+
+                            -- Always show/hide the health bar background based on health bar visibility
+                            healthBarBackground.Visible = healthBarEnabled
+
                         else
+                            -- If not headVisible, hide all components
                             box.Visible = false
                             text.Visible = false
-                            healthBar.Visible = false
                             healthText.Visible = false
                             distancetext.Visible = false
+                            healthBar.Visible = false
                             healthBarBackground.Visible = false
                         end
                     end
                 else
-                    -- Hide all components if health is 0 or below
+                    -- If health is 0 or below, hide all components
                     box.Visible = false
                     text.Visible = false
-                    healthBar.Visible = false
                     healthText.Visible = false
                     distancetext.Visible = false
+                    healthBar.Visible = false
                     healthBarBackground.Visible = false
                 end
             end
